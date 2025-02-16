@@ -29,7 +29,9 @@ namespace Mochie.ShaderUpgrader
             }
             else
             {
+                #if MOCHIE_DEV
                 Debug.LogWarning($"Couldn't find <b>Texture</b> property with name <b>{SourcePropertyName}</b> in Material {materialContext.Material?.name} when running action {GetType().Name} ({SourcePropertyName} -> {TargetPropertyName})");
+                #endif
             }
         }
     }
