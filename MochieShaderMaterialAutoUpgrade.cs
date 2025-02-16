@@ -58,6 +58,14 @@ namespace Mochie.ShaderUpgrader
         {
             foreach(var material in materials)
             {
+                if(material.parent != null)
+                {
+                    #if MOCHIE_DEV
+                    Debug.Log($"Skipping upgrade of material <b>{material.name}</b> because it's a variant of <b>{material.parent.name}</b>");
+                    #endif
+                    continue;
+                }
+                
                 AssetDatabase.SaveAssetIfDirty(material);
                 
                 if(material.shader == null || material.shader.name == ErrorShaderName)
