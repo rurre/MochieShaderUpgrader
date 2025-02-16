@@ -88,8 +88,6 @@ namespace Mochie.ShaderUpgrader
                 new CopyFloatPropertyValueAction("_UVDetailMask", "_UVDetailMaskSet"),
                 new CopyFloatPropertyValueAction("_DetailRotate", "_UVDetailMaskRotation"),
                 new CopyVectorPropertyValueAction("_DetailScroll", "_UVDetailMaskScroll"),
-                new CopyFloatPropertyValueAction("_UVRain", "_UVRainSet"),
-                new CopyFloatPropertyValueAction("_UVRainRotate", "_UVRainRotation"),
                 new CopyFloatPropertyValueAction("_OcclusionUVSet", "_AreaLitOcclusionUVSet"),
                 new CopyFloatPropertyValueAction("_Cull", "_Culling"),
                 
