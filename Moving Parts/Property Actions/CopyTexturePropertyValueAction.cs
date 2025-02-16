@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Mochie.ShaderUpgrader
 {
     public class CopyTexturePropertyValueAction : CopyPropertyValueActionBase
@@ -24,6 +26,10 @@ namespace Mochie.ShaderUpgrader
                     materialContext.Material.SetTextureOffset(TargetPropertyName, textureContainerValue.offset);
                 if(CopyTextureScale)
                     materialContext.Material.SetTextureScale(TargetPropertyName, textureContainerValue.scale);
+            }
+            else
+            {
+                Debug.LogWarning($"Couldn't find <b>Texture</b> property with name <b>{SourcePropertyName}</b> in Material {materialContext.Material?.name} when running action {GetType().Name} ({SourcePropertyName} -> {TargetPropertyName})");
             }
         }
     }

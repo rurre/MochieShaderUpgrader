@@ -10,6 +10,8 @@ namespace Mochie.ShaderUpgrader
         {
             if(materialContext.TryGetColorOrVector(SourcePropertyName, out Color vectorValue)) 
                 materialContext.Material.SetVector(TargetPropertyName, vectorValue);
+            else
+                Debug.LogWarning($"Couldn't find <b>Vector</b> property with name <b>{SourcePropertyName}</b> in Material {materialContext.Material?.name} when running action {GetType().Name} ({SourcePropertyName} -> {TargetPropertyName})");
         }
     }
 }

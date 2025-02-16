@@ -9,11 +9,11 @@ namespace Mochie.ShaderUpgrader
     /// </summary>
     public class SetPropertyValueAction : PropertyActionBase
     {
-        bool SkipIfNonDefault { get; set; }
-        float FloatValue { get; set; }
-        int IntValue { get; set; }
-        Vector4 VectorValue { get; set; }
-        GUID GuidValue { get; set; }
+        bool SkipIfNonDefault { get; }
+        float FloatValue { get; }
+        int IntValue { get; }
+        Vector4 VectorValue { get; }
+        GUID GuidValue { get; }
 
         /// <summary>
         /// Sets a material's Float property value based on TargetPropertyName 
@@ -101,21 +101,21 @@ namespace Mochie.ShaderUpgrader
                 case SerializedMaterialPropertyType.Texture:
                     if(GuidValue.Empty())
                     {
-                        Debug.LogError("Texture GUID is empty.");
+                        Debug.LogError($"Texture GUID is empty. Failed when running {GetType().Name} ({SourcePropertyName} -> {TargetPropertyName})");
                         break;
                     }
 
                     string assetPath = AssetDatabase.GUIDToAssetPath(GuidValue);
                     if(string.IsNullOrWhiteSpace(assetPath))
                     {
-                        Debug.LogError($"Couldn't get asset path of GUID {GuidValue}. Asset might not exist in your project.");
+                        Debug.LogWarning($"Couldn't get asset path of GUID {GuidValue}. Asset might not exist in your project. Failed when running {GetType().Name} ({SourcePropertyName} -> {TargetPropertyName})");
                         break;
                     }
 
                     Texture newTexture = AssetDatabase.LoadAssetAtPath<Texture>(assetPath);
                     if(newTexture == null)
                     {
-                        Debug.LogError($"Couldn't load texture with guid {GuidValue}. It's probably not a texture.");
+                        Debug.LogWarning($"Couldn't load texture with guid {GuidValue}. It's probably not a texture. Failed when running {GetType().Name} ({SourcePropertyName} -> {TargetPropertyName})");
                         break;
                     }
 
@@ -130,7 +130,7 @@ namespace Mochie.ShaderUpgrader
                     }
                     break;
                 default:
-                    throw new ArgumentException($"Unsupported property type {PropertyType}");
+                    throw new ArgumentException($"Unsupported property type {PropertyType}. Failed when running {GetType().Name} ({SourcePropertyName} -> {TargetPropertyName})");
             }
         }
     }

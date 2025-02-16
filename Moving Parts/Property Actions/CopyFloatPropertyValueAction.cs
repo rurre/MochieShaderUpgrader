@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Mochie.ShaderUpgrader
 {
     public class CopyFloatPropertyValueAction : CopyPropertyValueActionBase
@@ -8,6 +10,8 @@ namespace Mochie.ShaderUpgrader
         {
             if(materialContext.TryGetFloat(SourcePropertyName, out float floatValue)) 
                 materialContext.Material.SetFloat(TargetPropertyName, floatValue);
+            else
+                Debug.LogWarning($"Couldn't find <b>Float</b> property with name <b>{SourcePropertyName}</b> in Material {materialContext.Material?.name} when running action {GetType().Name} ({SourcePropertyName} -> {TargetPropertyName})");
         }
     }
 }

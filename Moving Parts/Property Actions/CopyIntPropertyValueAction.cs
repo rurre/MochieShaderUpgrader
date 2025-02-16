@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Mochie.ShaderUpgrader
 {
     public class CopyIntPropertyValueAction : CopyPropertyValueActionBase
@@ -9,6 +11,8 @@ namespace Mochie.ShaderUpgrader
         {
             if(materialContext.TryGetInt(SourcePropertyName, out int intValue)) 
                 materialContext.Material.SetInt(TargetPropertyName, intValue);
+            else
+                Debug.LogWarning($"Couldn't find <b>Int</b> property with name <b>{SourcePropertyName}</b> in Material {materialContext.Material?.name} when running action {GetType().Name} ({SourcePropertyName} -> {TargetPropertyName})");
         }
     }
 }
