@@ -29,6 +29,7 @@ namespace Mochie.ShaderUpgrader
         {
             foreach(var material in materials)
             {
+                #if UNITY_2022_1_OR_NEWER
                 if(material.parent != null)
                 {
                     #if MOCHIE_DEV
@@ -36,6 +37,7 @@ namespace Mochie.ShaderUpgrader
                     #endif
                     continue;
                 }
+                #endif
                 
                 AssetDatabase.SaveAssetIfDirty(material);
 
