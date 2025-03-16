@@ -7,17 +7,9 @@ namespace Mochie.ShaderUpgrader
 {
     public class MochieMaterialUpgrade_V0_To_V1 : MochieMaterialUpgradeBase
     {
-        public override bool CanUpgradeMaterial(Material material)
+        public override List<UpgradeActionBase> AddUpgradeActions()
         {
-            // Skip if material doesn't use our any of our shaders
-            if(MochieShaderMaterialAutoUpgrade.ShaderNames.All(name => name != material.shader.name))
-                return false;
-            return true;
-        }
-
-        public override List<PropertyActionBase> AddPropertyActions()
-        {
-            return new List<PropertyActionBase>
+            return new List<UpgradeActionBase>
             {  
                 new CopyFloatPropertyValueAction("_Workflow", "_PrimaryWorkflow"),
                 new CopyFloatPropertyValueAction("_SamplingMode","_PrimarySampleMode"),
