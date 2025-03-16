@@ -9,7 +9,7 @@ namespace Mochie.ShaderUpgrader
         {
             propertyActions.AddRange(AddUpgradeActions());
         }
-        
+
         readonly List<UpgradeActionBase> propertyActions = new List<UpgradeActionBase>();
 
         /// <summary>
@@ -24,12 +24,12 @@ namespace Mochie.ShaderUpgrader
         /// </summary>
         /// <returns></returns>
         public abstract List<UpgradeActionBase> AddUpgradeActions();
-        
+
         /// <summary>
         /// Iterate through all properties in propertyActions and run their actions 
         /// </summary>
         /// <param name="material"></param>
-        public void RunUpgrade(Material material)
+        public virtual void RunUpgrade(Material material)
         {
             if(!CanUpgradeMaterial(material))
                 return;
